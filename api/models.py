@@ -27,7 +27,7 @@ class cart(models.Model):
 # model for the whole order list 
 # linked to user who ordered and to delivery crew
 class order(models.Model):
-    User = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     delivery_crew = models.ForeignKey(User, on_delete=models.SET_NULL,related_name="delivery_crew",null=True)
     status = models.BooleanField(db_index=True,default=0)
     total = models.DecimalField(max_digits=6,decimal_places=2)
