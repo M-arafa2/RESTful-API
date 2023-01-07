@@ -10,9 +10,8 @@ class MenuItem(models.Model):
     title = models.CharField(max_length=255, db_index=True)
     price = models.DecimalField(max_digits=5,decimal_places=2,db_index=true)
     featured = models.BooleanField(db_index=true)
-    category = models.ForeignKey(category,on_delete=models.PROTECT)
-    
-
+    category = models.ForeignKey(category,on_delete=models.PROTECT)   
+     
 #model to contain all the orders made by user
 #linked to user and menu item models
 class cart(models.Model):
@@ -24,6 +23,7 @@ class cart(models.Model):
     
     class Meta:
         unique_togother =('menuitem','user')
+        
 # model for the whole order list 
 # linked to user who ordered and to delivery crew
 class order(models.Model):
