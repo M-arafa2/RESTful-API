@@ -13,6 +13,8 @@ class MenuItem(models.Model):
     category = models.ForeignKey(category,on_delete=models.PROTECT)
     
 
+#model to contain all the orders made by user
+#linked to user and menu item models
 class cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     menuitem = models.ForeignKey(MenuItem,on_delete=models.CASCADE)
@@ -22,7 +24,8 @@ class cart(models.Model):
     
     class Meta:
         unique_togother =('menuitem','user')
-
+# model for the whole order list 
+# linked to user who ordered and to delivery crew
 class order(models.Model):
     User = models.ForeignKey(User, on_delete=models.CASCADE)
     delivery_crew = models.ForeignKey(User, on_delete=models.SET_NULL,related_name="delivery_crew",null=True)
@@ -30,6 +33,8 @@ class order(models.Model):
     total = models.DecimalField(max_digits=6,decimal_places=2)
     date = models.DateField(db_index=True)
     
+# model for single item in the order list
+# relationship with order and menu item models 
 class orderITem(models.Model):
     order = models.ForeignKey(order,on_delete=models.CASCADE)
     menuItem = models.ForeignKey(MenuItem,on_delete=models.CASCADE)
