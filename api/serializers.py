@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 class categorySerializer(serializers.ModelSerializer):
     class Meta:
         model= category
-        fields = ['slug', 'title']
+        fields = ['id','slug', 'title']
         
 class MenuItemSerializer(serializers.ModelSerializer):
     category = serializers.PrimaryKeyRelatedField(
@@ -14,9 +14,9 @@ class MenuItemSerializer(serializers.ModelSerializer):
     )
     class Meta:
         model = MenuItem
-        fields = ['title', 'price', 'featured', 'category']
+        fields = ['id','title', 'price', 'featured', 'category']
         
-class cart(serializers.ModelSerializer):
+class cartSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(
         queryset = User.objects.all(),
         default = serializers.CurrentUserDefault
@@ -42,13 +42,13 @@ class orderSerializer(serializers.ModelSerializer):
                                     source ='order')
     class Meta:
         model  = order
-        fields = ['user', 'delivery_crew', 'status',
+        fields = ['id', 'user', 'delivery_crew', 'status',
                   'total', 'date', 'orderItem']
         
-class users(serializers.ModelSerializer):
+class userSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'email', 'username']
+        fields = ['id', 'username', 'email']
         
 
     
