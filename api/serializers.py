@@ -19,7 +19,7 @@ class MenuItemSerializer(serializers.ModelSerializer):
 class cartSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(
         queryset = User.objects.all(),
-        default = serializers.CurrentUserDefault
+        default = serializers.CurrentUserDefault()
     )
     def validate(self, attrs):
         attrs['price'] = attrs['quantity'] * attrs['unit_price']
